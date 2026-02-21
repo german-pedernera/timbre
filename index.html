@@ -165,7 +165,7 @@
             const fecha = document.getElementById('fecha').value;
             const msj = document.getElementById('mensaje').value;
 
-            if(nombre.trim() !== "" && msj.trim() !== "") {
+            if(nombre.trim() !== "" && tel.trim() !== "" && fecha.trim() !== "" && msj.trim() !== "") {
                 const avisosRef = ref(db, 'avisos/');
                 
                 push(avisosRef, {
@@ -193,7 +193,7 @@
                     customAlert("Error", "Error al conectar con la base de datos.");
                 });
             } else {
-                customAlert("Atención", "Por favor, completa nombre y mensaje.");
+                customAlert("Atención", "Por favor, completa todos los datos solicitados.");
             }
         }
     </script>
