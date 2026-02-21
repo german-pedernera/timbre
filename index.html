@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timbre Familia Pedernera Faiad</title>
+    
+    <link rel="icon" type="image/jpeg" href="/trio.jpeg">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS GENERAL (Original mantenido) --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #f0f2f5; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; padding: 15px; color: #333; }
+        .container { max-width: 600px; width: 100%; text-align: center; }
+        .header-inline { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 25px; }
+        .logo-main { width: 70px; height: 70px; background-color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 2px solid #fff; flex-shrink: 0; }
+        .logo-main img { width: 100%; height: 100%; object-fit: cover; }
+        h1 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; color: #1a1a1a; font-size: 1.5rem; text-align: left; line-height: 1.2; }
+        .shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.08); background: white; border-radius: 20px; padding: 20px; margin-bottom: 15px; }
+        h2 { font-family: 'Bricolage Grotesque', sans-serif; margin-bottom: 15px; color: #2c3e50; font-size: 1.3rem; }
+        .map-container { border-radius: 15px; overflow: hidden; border: 1px solid #ddd; margin-top: 10px; }
+        .small { color: #7f8c8d; font-size: 0.85rem; margin-top: 5px; }
+        .cards-wrapper { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 8px; margin-bottom: 15px; }
+        .card { flex: 1; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 5px; border: 2px solid transparent; text-decoration: none; color: inherit; min-width: 0; outline: none; }
+        .card:hover { transform: translateY(-3px); }
+        .card:focus { border-color: #007bff; box-shadow: 0 0 10px rgba(0, 123, 255, 0.3); }
+        .card img { width: 35px; height: 35px; margin-bottom: 5px; }
+        .icon-tel { background-color: #1a1a1a; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; padding: 8px; margin-bottom: 5px; }
+        .icon-tel svg { fill: white; width: 100%; height: 100%; }
+        .card h3 { font-size: 0.75rem; font-family: 'Bricolage Grotesque', sans-serif; }
+        .form-section input, .form-section textarea { width: 100%; padding: 12px; margin-top: 10px; border-radius: 12px; border: 1px solid #ddd; font-family: inherit; font-size: 0.95rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
+        .form-section textarea { height: 80px; resize: none; }
+        .form-section input:focus, .form-section textarea:focus { border-color: #007bff; box-shadow: 0 0 8px rgba(0, 123, 255, 0.25); }
+        .btn-send { width: 100%; background-color: #1a1a1a; color: white; border: none; padding: 14px; margin-top: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; font-family: 'Bricolage Grotesque'; font-size: 1rem; outline: none; }
+        
+        /* --- MODALES --- */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(4px); align-items: center; justify-content: center; }
+        .modal-content { background-color: #fff; width: 90%; max-width: 400px; position: relative; padding: 30px 15px; border-radius: 25px; text-align: center; }
+        .close { position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #999; }
+        .modal-cards { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
+        .profile-img { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; border: 3px solid #f0f2f5; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .modal-cards .card { padding: 20px; flex-direction: row; justify-content: flex-start; gap: 20px; }
+        .modal-cards h3 { font-size: 1.2rem; }
+        
+        /* Estilo específico para el modal de alerta */
+        #modalAlert h2 { margin-top: 10px; }
+        #modalAlert p { margin-bottom: 20px; font-size: 1.1rem; }
+
+        @media (max-width: 400px) { .header-inline { gap: 10px; } h1 { font-size: 1.2rem; } .logo-main { width: 60px; height: 60px; } .profile-img { width: 90px; height: 90px; } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="header-inline">
+            <div class="logo-main">
+                <img src="/trio.jpeg" alt="Logo Familia">
+            </div>
+            <h1>Familia Pedernera Faiad</h1>
+        </header>
+
+        <section class="shadow">
+            <h2>Nuestra Ubicación</h2>
+            <p><strong>Calle Rio Cuarto 643</strong></p>
+            <p>Santa Catalina, Córdoba</p>
+            <p class="small">Entre Gral. Paz y Calle Córdoba</p>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1669.0639490094252!2d-64.42950557397369!3d-33.21074305992501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1771703752948!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+
+        <section class="cards-wrapper">
+            <div class="card card-ws shadow" tabindex="0" onclick="abrirModal('modalWhatsapp')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                <h3>WhatsApp</h3>
+            </div>
+            <div class="card card-tg shadow" tabindex="0" onclick="abrirModal('modalTelegram')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+                <h3>Telegram</h3>
+            </div>
+            <div class="card card-tel shadow" tabindex="0" onclick="abrirModal('modalLlamar')">
+                <div class="icon-tel"><svg viewBox="0 0 24 24"><path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"/></svg></div>
+                <h3>Llamar</h3>
+            </div>
+        </section>
+
+        <section class="shadow form-section">
+            <h2>¿No estamos? Deja un aviso</h2>
+            <input type="date" id="fecha">
+            <input type="text" id="nombre" placeholder="Nombre y Apellido">
+            <input type="tel" id="telefono" placeholder="Tu Teléfono">
+            <textarea id="mensaje" placeholder="Escribe tu mensaje aquí..."></textarea>
+            <button class="btn-send" onclick="enviarAFirebase()">Enviar Mensaje</button>
+        </section>
+    </div>
+
+    <div id="modalWhatsapp" class="modal"><div class="modal-content"><span class="close" onclick="cerrarModal('modalWhatsapp')">×</span><h2>WhatsApp a:</h2><div class="modal-cards">
+        <div class="card shadow" onclick="contactar('whatsapp', '5491169534244')">
+            <img src="https://cdn-icons-png.flaticon.com/512/4128/4128176.png" class="profile-img" alt="Germán">
+            <h3>Germán</h3>
+        </div>
+        <div class="card shadow" onclick="contactar('whatsapp', '5493513603703')">
+            <img src="https://cdn-icons-png.flaticon.com/512/6997/6997662.png" class="profile-img" alt="Claudia">
+            <h3>Claudia</h3>
+        </div>
+    </div></div></div>
+
+    <div id="modalTelegram" class="modal"><div class="modal-content"><span class="close" onclick="cerrarModal('modalTelegram')">×</span><h2>Telegram a:</h2><div class="modal-cards">
+        <div class="card shadow" onclick="contactar('telegram', 'GERMAN_USER')">
+            <img src="https://cdn-icons-png.flaticon.com/512/4128/4128176.png" class="profile-img" alt="Germán">
+            <h3>Germán</h3>
+        </div>
+        <div class="card shadow" onclick="contactar('telegram', 'CLAUDIA_USER')">
+            <img src="https://cdn-icons-png.flaticon.com/512/6997/6997662.png" class="profile-img" alt="Claudia">
+            <h3>Claudia</h3>
+        </div>
+    </div></div></div>
+
+    <div id="modalLlamar" class="modal"><div class="modal-content"><span class="close" onclick="cerrarModal('modalLlamar')">×</span><h2>Llamar a:</h2><div class="modal-cards">
+        <a href="tel:+5491169534244" class="card shadow">
+            <img src="https://cdn-icons-png.flaticon.com/512/4128/4128176.png" class="profile-img" alt="Germán">
+            <h3>Germán</h3>
+        </a>
+        <a href="tel:+5493513603703" class="card shadow">
+            <img src="https://cdn-icons-png.flaticon.com/512/6997/6997662.png" class="profile-img" alt="Claudia">
+            <h3>Claudia</h3>
+        </a>
+    </div></div></div>
+
+    <div id="modalAlert" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal('modalAlert')">×</span>
+            <h2 id="alertTitle">Aviso</h2>
+            <p id="alertMessage"></p>
+            <button class="btn-send" onclick="cerrarModal('modalAlert')">Entendido</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCmxFXCyJ3n6XkWvbm18r48FLpcDeqIejs",
+            authDomain: "timbre-familia.firebaseapp.com",
+            projectId: "timbre-familia",
+            storageBucket: "timbre-familia.firebasestorage.app",
+            messagingSenderId: "464306605020",
+            appId: "1:464306605020:web:92196eea4258b1beda9d19"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        const TELEGRAM_TOKEN = "8579415052:AAEqb5wVBfQopBI1O7emKI38WDT33vJ47u8";
+        const TELEGRAM_CHAT_ID = "1222847704";
+
+        window.enviarAFirebase = function() {
+            const nombre = document.getElementById('nombre').value;
+            const tel = document.getElementById('telefono').value;
+            const fecha = document.getElementById('fecha').value;
+            const msj = document.getElementById('mensaje').value;
+
+            if(nombre.trim() !== "" && msj.trim() !== "") {
+                const avisosRef = ref(db, 'avisos/');
+                
+                push(avisosRef, {
+                    visitante: nombre,
+                    telefono: tel,
+                    fecha_aviso: fecha,
+                    mensaje: msj,
+                    timestamp: new Date().toLocaleString()
+                })
+                .then(() => {
+                    const textoMsg = `🔔 *¡Nuevo aviso en el timbre!*\n\n👤 *Nombre:* ${nombre}\n📞 *Tel:* ${tel}\n📅 *Fecha:* ${fecha}\n💬 *Mensaje:* ${msj}`;
+                    
+                    fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(textoMsg)}&parse_mode=Markdown`)
+                    .then(() => {
+                        customAlert("¡Éxito!", "¡Aviso enviado con éxito!");
+                        document.getElementById('nombre').value = "";
+                        document.getElementById('telefono').value = "";
+                        document.getElementById('mensaje').value = "";
+                        document.getElementById('fecha').valueAsDate = new Date();
+                    })
+                    .catch(err => console.error("Error Telegram:", err));
+                })
+                .catch((error) => {
+                    console.error("Error Firebase:", error);
+                    customAlert("Error", "Error al conectar con la base de datos.");
+                });
+            } else {
+                customAlert("Atención", "Por favor, completa nombre y mensaje.");
+            }
+        }
+    </script>
+
+    <script>
+        function abrirModal(id) { document.getElementById(id).style.display = "flex"; }
+        function cerrarModal(id) { document.getElementById(id).style.display = "none"; }
+        
+        // Función para reemplazar el alert
+        function customAlert(titulo, mensaje) {
+            document.getElementById('alertTitle').innerText = titulo;
+            document.getElementById('alertMessage').innerText = mensaje;
+            abrirModal('modalAlert');
+        }
+
+        window.onclick = function(e) { if(e.target.className === 'modal') e.target.style.display = "none"; }
+        
+        function contactar(p, id) { 
+            const texto = encodeURIComponent("¡Hola! Estoy en la puerta de tu casa.");
+            let url = p === 'whatsapp' ? `https://wa.me/${id}?text=${texto}` : `https://t.me/${id}?text=${texto}`;
+            window.open(url, '_blank'); 
+        }
+        document.getElementById('fecha').valueAsDate = new Date();
+    </script>
+</body>
+</html>
